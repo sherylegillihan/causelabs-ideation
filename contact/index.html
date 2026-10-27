@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.classList.remove('no-js');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — CauseLabs</title>
+<meta name="description" content="It starts with a smile. Have a comment, question, or other request? Use the form to help us understand your needs so that we can have an informed first conversation with you.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — CauseLabs">
+<meta property="og:description" content="It starts with a smile. Have a comment, question, or other request? Use the form to help us understand your needs so that we can have an informed first conversation with you.">
+<meta property="og:url" content="https://www.causelabs.com/contact">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F3F0E8">
+
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../assets/fonts/fraunces-latin-400-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../assets/fonts/figtree-latin-400-normal.woff2">
+
+<link rel="stylesheet" href="../assets/css/fonts.css">
+<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body class="page">
+
+  <span class="rail" aria-hidden="true">
+    <span class="rail__plus">+</span>
+    <span class="rail__text">Embrace possibility</span>
+  </span>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+
+    <a class="brand" href="../index.html" aria-label="CauseLabs — home">
+      <img class="brand__mark"
+           src="../assets/img/logo-causelabs.png"
+           alt="CauseLabs"
+           width="380" height="66">
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../work/index.html">Work</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../approach/index.html">Approach</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../ideas/index.html">Ideas</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../contact/index.html">Contact</a>
+          </li>
+      </ul>
+    </nav>
+
+    <span class="site-header__dot" aria-hidden="true"></span>
+
+    <button class="nav-toggle" type="button"
+            aria-expanded="false" aria-controls="site-nav"
+            aria-label="Open menu" data-nav-toggle>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+  </div>
+</header>
+
+  <main id="main">
+
+<section class="contact-hero">
+  <div class="contact-hero__inner">
+
+    <div class="contact-hero__copy" data-reveal>
+      <h1 class="eyebrow contact-hero__eyebrow">Get in touch</h1>
+      <h2 class="contact-hero__heading">It starts with a smile.</h2>
+      <p class="contact-hero__subhead">At the beginning of every partnership is a smile and a conversation.</p>
+      <p class="contact-hero__intro">Have a comment, question, or other request? Use the form to help us understand your needs so that we can have an informed first conversation with you.</p>
+    </div>
+
+    <div class="contact-hero__form-card" data-reveal data-reveal-delay="1">
+      <!--
+        Static export — this form has no backend to POST to yet. It validates
+        client-side and, on submit, swaps in a confirmation message (see
+        initContactForm in main.js) so the page demonstrates the intended flow.
+        Wiring it up for real means pointing `action` at a form endpoint
+        (e.g. Formspree, a serverless function, or PHP mail()) and removing
+        the JS short-circuit.
+      -->
+      <form class="contact-form" data-contact-form novalidate>
+
+        <div class="contact-form__row contact-form__row--split">
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-first-name">First name *</label>
+            <input class="contact-form__input" type="text" id="contact-first-name" name="first_name" autocomplete="given-name" required>
+          </div>
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-last-name">Last name *</label>
+            <input class="contact-form__input" type="text" id="contact-last-name" name="last_name" autocomplete="family-name" required>
+          </div>
+        </div>
+
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-email">Email address *</label>
+            <input class="contact-form__input" type="email" id="contact-email" name="email" autocomplete="email" required>
+          </div>
+        </div>
+
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-reason">I'm reaching out about... *</label>
+            <div class="contact-form__select-wrap">
+              <select class="contact-form__select" id="contact-reason" name="reason" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="A job posting">A job posting</option>
+                <option value="Press, media, or speaker inquiry">Press, media, or speaker inquiry</option>
+                <option value="Partnership inquiry">Partnership inquiry</option>
+                <option value="CauseLabs Care Plans">CauseLabs Care Plans</option>
+                <option value="Getting an accessibility audit">Getting an accessibility audit</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="contact-message">Tell us a little about your request *</label>
+            <textarea class="contact-form__textarea" id="contact-message" name="message" rows="4" required></textarea>
+          </div>
+        </div>
+
+        <div class="contact-form__row">
+          <label class="contact-form__checkbox">
+            <input type="checkbox" id="contact-newsletter" name="newsletter_opt_in">
+            <span>I would like to receive your monthly newsletter</span>
+          </label>
+        </div>
+
+        <div class="contact-form__row contact-form__row--submit">
+          <button class="contact-form__submit" type="submit">
+            Submit
+            <svg class="icon icon--arrow icon--arrow-sm" viewBox="0 0 64 24" fill="none" aria-hidden="true" focusable="false">
+  <path d="M1 12.4c11.6-.7 23.3-1 34.9-1 8.2 0 16.4.2 24.6.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M50.6 4.2c2.9 3.2 6.3 6 10.1 8.1-3.9 1.9-7.4 4.5-10.4 7.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>          </button>
+          <p class="contact-form__note" data-contact-note role="status" aria-live="polite"></p>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<section class="contact-redirects">
+  <div class="contact-redirects__inner">
+    <div class="contact-redirects__item" data-reveal data-reveal-delay="1">
+      <p class="contact-redirects__body">Have a project in mind?</p>
+      <a class="hand-link hand-link--sm" href="https://causelabs.bookafy.com" target="_blank" rel="noopener noreferrer">
+  <span class="hand-link__text">Book a call<svg class="icon icon--underline" viewBox="0 0 180 18" fill="none" aria-hidden="true" focusable="false">
+  <path d="M3 8.5C34 3.4 66.6 1.9 98.6 2.6c26.3.6 52.5 2.6 78.4 6"
+        stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M17 15.3c30-4.2 60.4-5.9 90.7-5.1 20.6.5 41.1 2.2 61.4 4.9"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+</svg></span>
+  <svg class="icon icon--arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true" focusable="false">
+  <path d="M1 12.4c11.6-.7 23.3-1 34.9-1 8.2 0 16.4.2 24.6.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M50.6 4.2c2.9 3.2 6.3 6 10.1 8.1-3.9 1.9-7.4 4.5-10.4 7.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>    </div>
+    <div class="contact-redirects__item" data-reveal data-reveal-delay="2">
+      <p class="contact-redirects__body">Looking to join the team?</p>
+      <a class="hand-link hand-link--sm" href="https://www.causelabs.com/careers/" target="_blank" rel="noopener noreferrer">
+  <span class="hand-link__text">See open roles<svg class="icon icon--underline" viewBox="0 0 180 18" fill="none" aria-hidden="true" focusable="false">
+  <path d="M3 8.5C34 3.4 66.6 1.9 98.6 2.6c26.3.6 52.5 2.6 78.4 6"
+        stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M17 15.3c30-4.2 60.4-5.9 90.7-5.1 20.6.5 41.1 2.2 61.4 4.9"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+</svg></span>
+  <svg class="icon icon--arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true" focusable="false">
+  <path d="M1 12.4c11.6-.7 23.3-1 34.9-1 8.2 0 16.4.2 24.6.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M50.6 4.2c2.9 3.2 6.3 6 10.1 8.1-3.9 1.9-7.4 4.5-10.4 7.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>    </div>
+    <div class="contact-redirects__item" data-reveal data-reveal-delay="3">
+      <p class="contact-redirects__body">Sponsorship, media, or speaking?</p>
+      <a class="hand-link hand-link--sm" href="https://www.causelabs.com/about/media-kit/" target="_blank" rel="noopener noreferrer">
+  <span class="hand-link__text">View our media kit<svg class="icon icon--underline" viewBox="0 0 180 18" fill="none" aria-hidden="true" focusable="false">
+  <path d="M3 8.5C34 3.4 66.6 1.9 98.6 2.6c26.3.6 52.5 2.6 78.4 6"
+        stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M17 15.3c30-4.2 60.4-5.9 90.7-5.1 20.6.5 41.1 2.2 61.4 4.9"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+</svg></span>
+  <svg class="icon icon--arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true" focusable="false">
+  <path d="M1 12.4c11.6-.7 23.3-1 34.9-1 8.2 0 16.4.2 24.6.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M50.6 4.2c2.9 3.2 6.3 6 10.1 8.1-3.9 1.9-7.4 4.5-10.4 7.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>    </div>
+  </div>
+</section>
+  </main>
+
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__brand">
+      <img class="site-footer__mark"
+           src="../assets/img/logo-causelabs.png"
+           alt="CauseLabs"
+           width="300" height="52" loading="lazy" decoding="async">
+      <p class="site-footer__tagline">Technology for organizations solving complex problems.</p>
+    </div>
+
+      <nav class="site-footer__col" aria-label="Company">
+        <h2 class="site-footer__heading">Company</h2>
+        <ul class="site-footer__list">
+            <li><a class="site-footer__link" href="../work/index.html">Work</a></li>
+            <li><a class="site-footer__link" href="../approach/index.html">Approach</a></li>
+            <li><a class="site-footer__link" href="../ideas/index.html">Ideas</a></li>
+            <li><a class="site-footer__link" href="../about/index.html">About</a></li>
+            <li><a class="site-footer__link" href="../careers/index.html">Careers</a></li>
+            <li><a class="site-footer__link" href="../contact/index.html">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="site-footer__col" aria-label="Connect">
+        <h2 class="site-footer__heading">Connect</h2>
+        <ul class="site-footer__list">
+            <li><a class="site-footer__link" href="https://www.facebook.com/causelabs" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li><a class="site-footer__link" href="https://www.instagram.com/causelabs/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a class="site-footer__link" href="https://www.linkedin.com/company/causelabs-pbc/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a class="site-footer__link" href="https://youtube.com/@causelabs" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+        </ul>
+      </nav>
+
+  </div>
+
+  <div class="site-footer__bar">
+    <p class="site-footer__copy">© 2026 CauseLabs. All rights reserved.</p>
+    <ul class="site-footer__legal">
+        <li><a class="site-footer__link" href="../privacy/index.html">Privacy</a></li>
+        <li><a class="site-footer__link" href="../accessibility/index.html">Accessibility</a></li>
+    </ul>
+  </div>
+</footer>
+
+  <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

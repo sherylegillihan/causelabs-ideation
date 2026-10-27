@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.classList.remove('no-js');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advanced REST API Design — CauseLabs</title>
+<meta name="description" content="In our previous post , we covered the basics of designing a REST API: defining endpoints, using HTTP verbs and performing common read-write operations on data. In this chapter, we&#039;re going to introduce some advanced use…">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Advanced REST API Design — CauseLabs">
+<meta property="og:description" content="In our previous post , we covered the basics of designing a REST API: defining endpoints, using HTTP verbs and performing common read-write operations on data. In this chapter, we&#039;re going to introduce some advanced use…">
+<meta property="og:url" content="https://www.causelabs.com/ideas/advanced-rest-api-design">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F3F0E8">
+
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/fraunces-latin-400-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/figtree-latin-400-normal.woff2">
+
+<link rel="stylesheet" href="../../assets/css/fonts.css">
+<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body class="page page--ideas">
+
+  <span class="rail" aria-hidden="true">
+    <span class="rail__plus">+</span>
+    <span class="rail__text">Embrace possibility</span>
+  </span>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+
+    <a class="brand" href="../../index.html" aria-label="CauseLabs — home">
+      <img class="brand__mark"
+           src="../../assets/img/logo-causelabs.png"
+           alt="CauseLabs"
+           width="380" height="66">
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../../work/index.html">Work</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../../approach/index.html">Approach</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../../ideas/index.html">Ideas</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../../contact/index.html">Contact</a>
+          </li>
+      </ul>
+    </nav>
+
+    <span class="site-header__dot" aria-hidden="true"></span>
+
+    <button class="nav-toggle" type="button"
+            aria-expanded="false" aria-controls="site-nav"
+            aria-label="Open menu" data-nav-toggle>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+  </div>
+</header>
+
+  <main id="main">
+
+<article class="idea-post">
+  <header class="idea-post__header">
+    <p class="idea-post__meta" data-reveal>
+      <a class="idea-post__category" href="../../ideas/index.html?category=Technology">Technology</a>
+      <span class="idea-post__date">Jan 18, 2017</span>
+    </p>
+    <h1 class="idea-post__title" data-reveal data-reveal-delay="1">Advanced REST API Design</h1>
+    <p class="idea-post__byline" data-reveal data-reveal-delay="2">By CauseLabs</p>
+  </header>
+
+  <figure class="idea-post__hero-figure" data-reveal data-reveal-delay="2">
+    <img src="https://www.causelabs.com/wp-content/uploads/2019/01/pexels-photo-340152.jpg" alt="" loading="eager" decoding="async">
+  </figure>
+
+    <div class="idea-post__body">
+    <p>In our <a href="https://www.causelabs.com/post/what-you-need-to-know-about-rest">previous post</a>, we covered the basics of designing a REST API: defining endpoints, using HTTP verbs and performing common read-write operations on data. In this chapter, we're going to introduce some advanced use and edge cases you may want to consider in order to give your REST API a sound and long-lasting design.</p>
+<p>More precisely, we will cover the following topics:</p>
+<ol><li>Working with resource lists: filtering, ordering, and pagination</li><li>Error handling and response codes</li><li>API versioning</li><li>Data formats</li></ol>
+<p>Let’s begin!</p>
+<h2>Working with lists: filtering, ordering, and pagination</h2>
+<p>In the previous chapter, we saw how to query a list of resources. If what we want is a list of contacts, for instance, we would do:</p>
+<p><strong>GET /contacts</strong></p>
+<p>And that’s it, the system should return a list of all the contacts in the database. However, this simple case is not very practical on production environments because the data set can be very large and expensive to send through HTTP and the query operation inefficient. In order to keep API calls as nimble and lightweight as possible, we may want to be more specific about the data we want to get. Hence, we can filter the list by adding a query condition and order it so that the most relevant results appear first; then, a widespread industry standard would be to split that list into several chunks and only serve the one immediately required, like the first 20 in the collection. This is called pagination.</p>
+<p>There are several ways to pass these modifiers on to the API endpoint. We can use specific URIs, custom headers or query parameters in the URI, for instance. Let’s see the pros and cons of each one.</p>
+<h2>Specific URIs</h2>
+<p>Defining dedicated endpoints for each operation on the list we may want to do could look like this:</p>
+<p><strong>/contacts/filter/</strong>:param/:value<strong>/contacts/orderby/</strong>:param/:asc<strong>/contacts/page/</strong>:pagenumber</p>
+<p>This looks pretty straightforward. But, what if we want to combine the operations? We could have some sort of endpoint like:</p>
+<p><strong>/contacts/filter/</strong>:param/:value/<strong>orderby/:</strong>param/<strong>:</strong>asc/<strong>page/</strong>:pagenumber</p>
+<p>That begins to get complicated. What if we want to specify several fields to filter or to order by? We would have to make the endpoint even longer and harder to debug, maintain and remember. What if we don’t want to set all the available parameters or operations in a given request? We would have to omit them, and the server would have to guess which ones were provided and which ones weren’t.</p>
+<p>This alternative won’t scale and will give us more headaches than joy, so let’s skip it and move to the next.</p>
+<h2>Custom Headers</h2>
+<p>Another way to convey operations and pass parameters to an API is to add custom headers to the HTTP request. For instance:</p>
+<p><strong>GET /contactsHeaders:</strong></p>
+<p><strong>Query</strong>: param1=value,param2=value<strong>Sort</strong>: param1:desc,param2:asc<strong>Page</strong>: pagenumber,pagesize</p>
+<p>Now, this is much more manageable and rather elegant. The URI is simple and easy to remember and we tell the backend what operations we want to do with the data by enclosing the instructions and parameters in the headers, keeping the URI unchanged. The server will check for the existence of each one of the headers and will apply or omit the operation accordingly. Extending the system with further fields is, therefore, very easy to do.</p>
+<p>There are a couple of main drawbacks with this solution, though. Not all clients and servers will deal with custom headers the same way. Some of them may ignore non-standard headers altogether. Thus, this method may break interoperability with clients. You should use custom headers only for informal purposes so that clients and servers do not fail when they don’t find them in the request.</p>
+<p>The second argument against this method is that URIs are Unique Resource Identifiers. While a paginated list of contacts is still about contacts, it has an associated modifier that should be made obvious and be part of the URI. The same goes with filtering conditions and sorting. A list of contacts from Ohio ordered alphabetically by last name is still a list about contacts, but not quite the same resource than a plain list.</p>
+<p>To overcome these two limitations, we need to take a look at the third approach.</p>
+<h2>Query Parameters</h2>
+<p>As we have seen in the previous two sections, using query parameters to alter the URI would be the best method to represent modifications to the base resource list. Here, you can use whatever naming convention makes more sense in your domain, but try to use industry standards to make life easier for your API consumers. For instance:</p>
+<p><strong>GET /contacts?sortBy</strong>=param1:desc,param2<strong>&amp;foo</strong>=bar<strong>&amp;page</strong>=3<strong>&amp;pagesize</strong>=20</p>
+<p>Let’s take a look at this endpoint in detail.</p>
+<p>The first thing we see is that the root of the URI has not changed, it is still <strong>/contacts</strong>. This makes the API design easy to remember and to consume. Then, we can see the different parameters added after the question (?) mark. Query parameters are flexible enough that we can add or omit them as we want, and it’s easy to check whether they are defined on the backend. The URI is unique and identifies specifically a list of contacts <strong>sorted by param1</strong><strong>descending</strong> and <strong>param2</strong> (ascending by default as a common-sense convention), then <strong>filtered by</strong> a field or attribute named <strong>foo</strong> whose value is <strong>bar</strong>; finally, we want the <strong>page number 3</strong> with a <strong>page size of 20 items per page</strong>, this is, the items ranging from #41 to #60.</p>
+<p>This method is easy to design, implement and remember. The order of the query parameters will not affect the result and we can extend it to add as many filter parameters as we need to. We could argue that by changing the query parameters’ order we would be producing a duplicate URI — which is wrong by definition since URIs must be unique. However, that would make the API inflexible so we will have to live with that trade-off.</p>
+<h2>Error Handling and Response Codes</h2>
+<p>Most of the times, requesting data from an API will return the data we asked for in the way we specified. But often, errors happen and the back-end cannot process the request for any reason. It is important, that the API handles these exceptions and returns an appropriate error message so that clients know what to do, eg. whether to ask again, or fix the request, or wait for some time.</p>
+<p>There is a whole list of status code your API can return with the response, you can check it <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" rel="noopener noreferrer" target="_blank">here</a>. They are basically grouped into the following families:</p>
+<ul><li>1xx: informational</li><li>2xx: success</li><li>3xx: redirection</li><li>4xx: client error</li><li>5xx: server error</li></ul>
+<p>The ones you will come across more often and that will be more helpful are:</p>
+<ul><li><strong>200 OK</strong>: the server got the request and responded accordingly.</li><li><strong>201 Created</strong>: a new resource has been created; you should return this code when handling a POST action on a collection, for instance.</li><li><strong>202 Accepted</strong>: the request has been accepted but not processed; it is queued for execution and might not be fulfilled. You can use this code when a request generates an action that will happen asynchronously, like a data update or an email.</li><li><strong>204 No Content</strong>: the request was processed but the server does not have any content to return. You can use this code when handling DELETE requests.</li><li><strong>301 Moved Permanently</strong>: the URL changed permanently and it can be found elsewhere.</li><li><strong>302 Found &amp; 303 See Other</strong>: the URL changed temporarily and can be found elsewhere.</li><li><strong>304 Not Modified</strong>: use this code to implement caching systems. If the request headers <strong>If-Modified-Since</strong> or <strong>If-None-Match</strong> are used and the server does not have a newer version to provide, then return <strong>304</strong> so that the client can use the copy it has stored locally.</li><li><strong>400 Bad Request</strong>: the request is malformed. Use this code to tell the client to re-send the information correcting the format issue.</li><li><strong>401 Unauthorized</strong>: the user is unauthenticated and cannot be granted access to a restricted resource. Logging into the system will solve this error.</li><li><strong>403 Forbidden</strong>: the user is authenticated but her cannot access this resource. Logging into the system will not change this error.</li><li><strong>404 Not Found</strong>: as it sounds, probably the most well-known error code on the Internet.</li><li><strong>405 Method Not Allowed</strong>: use this code when the client requests an HTTP verb that the given resource cannot handle, like POST on individual resources or PUT on collections.</li><li><strong>415 Unsupported Media Type</strong>: use this code when the content type used or requested by the client is not supported by your API, like JSON when you would expect XML.</li><li><strong>500 Internal Server Error</strong>: an unexpected error prevented the server from returning a response.</li><li><strong>503 Service Unavailable</strong>: the server is temporarily unavailable because it’s overloaded or due to maintenance reasons.</li></ul>
+<p>We should make sure that the right HTTP codes are returned along with the response, whether that was successful or produced an error. This will help your API consumers understand what your system is saying and build their applications on top of it. It will also ease debugging and testing your back-end as well — you might find edge cases faster by looking at the error codes returned.</p>
+<p>Another important best practice is to return an explicit and meaningful error message, with a link to a further explanation of the problem, so that the developers consuming your API can learn how to properly use it. Also, consider adding a <strong>Date</strong> header with the time at which the error was produced, and an error ID if it was tracked for further reference. For instance:</p>
+<p><strong>HTTP/1.1 400 Bad RequestDate</strong>: Wed, 4 Jan 2017 20:41 GMT<strong>Link:</strong>&lt;<a href="http://www.example.org/errors/badrequest.html" rel="noopener noreferrer" target="_blank">http://www.example.org/errors/badrequest.html</a>&gt;;rel="help"<strong>{    </strong>"<strong>message</strong>": "Wrong input parameters. Missing value for 'sortBy'",    "<strong>errorId</strong>": "348–587–956"<strong>}</strong></p>
+<p>You should try to make the error message as explicit as possible so that it’s easier for your API consumers to build their applications on top of your system.</p>
+<h2>API Versioning</h2>
+<p>An API is our system’s gateway to the world. Many external applications, systems, and services may depend on it. As a result, once an API is made public, it should not change: its endpoints and response data structures should be consistent in time.</p>
+<p>Software systems should be designed with maintainability in mind and should evolve and mutate very rapidly in the modern cloud web world. When your application needs to change so that it cannot maintain compatibility, or some clients require different behavior from other clients, it is the right time to version your API.</p>
+<p>The most commonly used pattern is to prefix your URIs schema with easily detectable terms like <strong>v1</strong> or <strong>v2</strong> in sub-domain names, path segments or query parameters. These are some valid alternatives:</p>
+<p>http://v1.yourapidomain.com/contactshttp://yourapidomain.com/v2/contacts</p>
+<p>http://yourapidomain.com/contacts?version=v1</p>
+<p>Use the pattern that works best with your server deployment and software frameworks. If you want the different versions to be handled by the same application, using path segments or query parameters may be convenient.</p>
+<p>Please also consider that versioning may also introduce other problems, such as:</p>
+<ul><li>Data compatibility may break between versions, or when upgrading to the last version.</li><li>Different business rules and application flows may require the clients to update.</li><li>Maintaining multiple versions of the same application will add complexity to your system.</li><li>Clients will need to be updated to use the new API endpoints.</li></ul>
+<p>Once an API is versioned, that version should be immutable and all future changes and adjustments released to a newer version. This is vital for your API clients to keep working correctly.</p>
+<h2>Response Content Types</h2>
+<p>JSON is the default content type standard in the industry nowadays, although XML is also used by some major APIs. Depending on your use case, you may want to offer the ability to retrieve the same data in different content types, including HTML or any other future representational format that may appear in the future.</p>
+<p>HTTP comes with a few headers specifically designed to deal with content types. On the client, you can request a specific format with the <strong>Accept</strong> header, like this:</p>
+<p><strong>Accept: application/json</strong></p>
+<p>If your client precises several content types, the server will respond with the first one available:</p>
+<p><strong>Accept: application/atom+xml, application/xml, application/json</strong></p>
+<p>If you are sending data to the server and you want to tell it to look for a specific content type, there the <strong>Content-Type</strong> header ready for you to use:</p>
+<p><strong>Content-Type: application/json</strong></p>
+<p>Please note that this header, unlike <strong>Accept</strong>, will only take one value. The server response will include the same<strong> Content-Type</strong> header specifying the format returned, that your client can check to make sure it can understand the data from the API.</p>
+<p>This is a very neat and elegant solution since the data format is not represented in the URI and therefore it’s not part of the endpoint as such. The resource is the same, we are only changing its representation.</p>
+<p>Your API should always check the <strong>Accept</strong> header received with the request. If it cannot satisfy the requested content type, then it should return an error code <strong>415 Unsupported Media Type</strong> and let the client know a list of supported content types. If the Accept header is not present, then your API should return a default content type. Choose the one that suits your project best; if you want a data format that’s easy to work with that widely supported, <strong>JSON</strong> is probably your best bet.</p>
+<p>We have covered a few topics that will help you boost your API to professional levels:</p>
+<ol><li>Use query parameters to implement resource modifiers like list sorting, filtering, and pagination.</li><li>Use HTTP error codes to tell the clients what went right or wrong and include a human-readable meaningful message if an error happened.</li><li>Version your API as soon as you need to introduce changes that would break compatibility with existing clients.</li><li>Use the Accept and Content-Type HTTP headers to specify the data format sent to and expected from the server; default to JSON for a quick starting point.</li></ol>
+<p>If you wish to learn more, please <a href="https://www.causelabs.com/contact">contact us</a>. We’d love to chat!</p>  </div>
+
+  <ul class="idea-post__tags">
+    <li class="idea-post__tag">API Development</li>
+    <li class="idea-post__tag">Software Development</li>
+  </ul>
+
+  <div class="idea-post__back">
+    <a class="hand-link hand-link--sm" href="../../ideas/index.html">
+  <span class="hand-link__text">Back to Ideas<svg class="icon icon--underline" viewBox="0 0 180 18" fill="none" aria-hidden="true" focusable="false">
+  <path d="M3 8.5C34 3.4 66.6 1.9 98.6 2.6c26.3.6 52.5 2.6 78.4 6"
+        stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M17 15.3c30-4.2 60.4-5.9 90.7-5.1 20.6.5 41.1 2.2 61.4 4.9"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+</svg></span>
+  <svg class="icon icon--arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true" focusable="false">
+  <path d="M1 12.4c11.6-.7 23.3-1 34.9-1 8.2 0 16.4.2 24.6.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M50.6 4.2c2.9 3.2 6.3 6 10.1 8.1-3.9 1.9-7.4 4.5-10.4 7.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>  </div>
+</article>
+  </main>
+
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__brand">
+      <img class="site-footer__mark"
+           src="../../assets/img/logo-causelabs.png"
+           alt="CauseLabs"
+           width="300" height="52" loading="lazy" decoding="async">
+      <p class="site-footer__tagline">Technology for organizations solving complex problems.</p>
+    </div>
+
+      <nav class="site-footer__col" aria-label="Company">
+        <h2 class="site-footer__heading">Company</h2>
+        <ul class="site-footer__list">
+            <li><a class="site-footer__link" href="../../work/index.html">Work</a></li>
+            <li><a class="site-footer__link" href="../../approach/index.html">Approach</a></li>
+            <li><a class="site-footer__link" href="../../ideas/index.html">Ideas</a></li>
+            <li><a class="site-footer__link" href="../../about/index.html">About</a></li>
+            <li><a class="site-footer__link" href="../../careers/index.html">Careers</a></li>
+            <li><a class="site-footer__link" href="../../contact/index.html">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="site-footer__col" aria-label="Connect">
+        <h2 class="site-footer__heading">Connect</h2>
+        <ul class="site-footer__list">
+            <li><a class="site-footer__link" href="https://www.facebook.com/causelabs" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li><a class="site-footer__link" href="https://www.instagram.com/causelabs/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a class="site-footer__link" href="https://www.linkedin.com/company/causelabs-pbc/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a class="site-footer__link" href="https://youtube.com/@causelabs" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+        </ul>
+      </nav>
+
+  </div>
+
+  <div class="site-footer__bar">
+    <p class="site-footer__copy">© 2026 CauseLabs. All rights reserved.</p>
+    <ul class="site-footer__legal">
+        <li><a class="site-footer__link" href="../../privacy/index.html">Privacy</a></li>
+        <li><a class="site-footer__link" href="../../accessibility/index.html">Accessibility</a></li>
+    </ul>
+  </div>
+</footer>
+
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

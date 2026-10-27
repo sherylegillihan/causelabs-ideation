@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.classList.remove('no-js');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What you need to know about REST. — CauseLabs</title>
+<meta name="description" content="If you are a developer and you’ve worked in any modern web application, I’m sure this term rings a bell for you. REST stands for Representational State Transfer. If you’re already familiar with the basics, hop over to…">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="What you need to know about REST. — CauseLabs">
+<meta property="og:description" content="If you are a developer and you’ve worked in any modern web application, I’m sure this term rings a bell for you. REST stands for Representational State Transfer. If you’re already familiar with the basics, hop over to…">
+<meta property="og:url" content="https://www.causelabs.com/ideas/what-you-need-to-know-about-rest">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F3F0E8">
+
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/fraunces-latin-400-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../../assets/fonts/figtree-latin-400-normal.woff2">
+
+<link rel="stylesheet" href="../../assets/css/fonts.css">
+<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body class="page page--ideas">
+
+  <span class="rail" aria-hidden="true">
+    <span class="rail__plus">+</span>
+    <span class="rail__text">Embrace possibility</span>
+  </span>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="site-header__inner">
+
+    <a class="brand" href="../../index.html" aria-label="CauseLabs — home">
+      <img class="brand__mark"
+           src="../../assets/img/logo-causelabs.png"
+           alt="CauseLabs"
+           width="380" height="66">
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul class="site-nav__list">
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../../work/index.html">Work</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../../approach/index.html">Approach</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../../ideas/index.html">Ideas</a>
+          </li>
+          <li class="site-nav__item">
+            <a class="site-nav__link" href="../../contact/index.html">Contact</a>
+          </li>
+      </ul>
+    </nav>
+
+    <span class="site-header__dot" aria-hidden="true"></span>
+
+    <button class="nav-toggle" type="button"
+            aria-expanded="false" aria-controls="site-nav"
+            aria-label="Open menu" data-nav-toggle>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+  </div>
+</header>
+
+  <main id="main">
+
+<article class="idea-post">
+  <header class="idea-post__header">
+    <p class="idea-post__meta" data-reveal>
+      <a class="idea-post__category" href="../../ideas/index.html?category=Technology">Technology</a>
+      <span class="idea-post__date">Jan 3, 2017</span>
+    </p>
+    <h1 class="idea-post__title" data-reveal data-reveal-delay="1">What you need to know about REST.</h1>
+    <p class="idea-post__byline" data-reveal data-reveal-delay="2">By CauseLabs</p>
+  </header>
+
+  <figure class="idea-post__hero-figure" data-reveal data-reveal-delay="2">
+    <img src="https://www.causelabs.com/wp-content/uploads/2019/01/farzad-nazifi.jpg" alt="" loading="eager" decoding="async">
+  </figure>
+
+    <div class="idea-post__body">
+    <p>If you are a developer and you’ve worked in any modern web application, I’m sure this term rings a bell for you. <a href="https://en.wikipedia.org/wiki/Representational_state_transfer" rel="noopener noreferrer" target="_blank">REST</a> stands for Representational State Transfer. If you’re already familiar with the basics, hop over to our look at <a href="https://www.causelabs.com/post/advanced-rest-api-design">Advanced REST API design.</a> If you’re in need of an intro, lets dive in and you’ll see why this architectural style has become a de-facto industry standard for back-end APIs.</p>
+<h2>Why REST?</h2>
+<p>REST is built on top of the HTTP standard, and it uses the same verbs (GET, POST, PUT, DELETE, OPTIONS, HEAD) than any web browser would use to navigate the internet. This makes REST open, standardized, and portable since any client being able to make HTTP requests can connect to an API and consume its data. As a result, any application (web, mobile, desktop, whatever) can connect to a REST API as long as both the client and the server are connected to the internet.</p>
+<p>Since it’s based on HTTP, RESTful APIs must define the resources or functions they publish as unique URIs — also named endpoints. So the first thing when you design a REST API is to design these URIs or endpoints so that your data is well structured and your API easy to use and understand. This separation between the public interface, the collection of URIs of your API, and the business logic of your application hidden behind the URI schema makes REST a solid way of structuring your API logic. This way, REST decouples the application architecture, allowing each endpoint (function or module) to evolve independently. This reduces the application complexity, and the maintenance overhead.</p>
+<p>Now, the fact that REST is considered an architectural style and not standard is because there’s some freedom to design the endpoints to better fit your needs. We’ll explore that later in this post.</p>
+<p>Another important strength of REST is that it’s stateless. This simplifies the APIs significantly, leaving the responsibility of keeping the application state to the API clients. A REST endpoint receives a request with, potentially, some input data, and answers to that based on the API’s inner state, but not the client’s session or other combination of client actions.</p>
+<p>This means that the queries to the API do not need to contain any information about the state or previous queries, which makes RESTful messages self-descriptive. A server response will contain all the information a client will need to decode and process it, including the MIME type and, in some cases, meta-links the client can follow to get related information. Since it’s not up to the server to keep the state, the client will have to decide what to do with the response. This greatly simplifies the server logic, allowing each client to decide how to react to a particular situation or state.</p>
+<p>Because the messages are self-descriptive, a RESTful API can receive and return JSON, XML or any other representational format. REST APIs are, therefore, portable and interoperable, since they don’t depend on a particular data structure. A single API could, for instance, provide support for several data formats, allowing different clients to interact with its resources.</p>
+<h2>What does it look like?</h2>
+<p>Talking about the benefits of REST is much easier when illustrated with an example. Say we have a contact list service we want to open to the world. The data model of this service would look something like this:</p>
+<figure class="post-figure"><img alt="" decoding="async" loading="lazy" src="https://www.causelabs.com/wp-content/uploads/2019/01/diagram.png"/></figure>
+<p>We want to be able to read and edit contacts, and the same with their phone numbers and addresses (each contact may have more than one of these). How would we design this in a RESTful manner? First, let’s take a look at the available HTTP verbs. There’s more than these, but let’s keep it simple for now:</p>
+<ul><li><strong>GET</strong>: reads resources; this is the equivalent of opening the URI in your browser</li><li><strong>PUT</strong>: updates resources</li><li><strong>POST</strong>: creates new resources; this is the equivalent of submitting an HTML form</li><li><strong>DELETE</strong>: deletes resources</li></ul>
+<p>Now, here is where it gets tricky with REST. It’s an architectural style, not an opinionated standard. This means that there’s some room in how we can design the different endpoints of our API. What defines a REST endpoint or resource is its URI so let’s design a few of them:</p>
+<ul><li><strong>/contacts</strong>: will operate with contact resources</li><li><strong>/phone-numbers</strong>: will operate with phone number resources</li><li><strong>/addresses</strong>: will operate with address resources</li></ul>
+<p>But, how can we actually make things with these URLs and HTTP verbs? Let’s see:</p>
+<ul><li><strong>GET /contacts </strong>will produce a list of contacts</li><li><strong>POST /contacts</strong> will create a new contact with the data sent with the query</li></ul>
+<p>The same is true for <strong>/phone-numbers</strong> and <strong>/addresses</strong>. However, we’re only creating resources and reading lists, how could we access individual resources? We need another endpoint for that:</p>
+<ul><li><strong>GET /contacts/:id</strong> will return a contact identified by its unique :id</li><li><strong>PUT /contacts/:id</strong> will replace the information of the contact identified by :id with the data sent with the query</li><li><strong>DELETE /contacts/:id</strong> will delete the contact identified by :id</li></ul>
+<p>It is important to note that some verbs operate at a collection level only (POST) and others at a resource level only (PUT and DELETE). They should not be used otherwise unless there is a very good reason to do so — we’ll see a couple of examples later.</p>
+<p>It’s important to note two best-practice rules here: resources in URLs should always be names, and the actions should be HTTP verbs. So <strong>POST /contacts</strong>is fine, and it tells us that we are creating (POST) a resource of type contact. <strong>POST /create-contact</strong> should be avoided, unless there is a very good reason to have it.</p>
+<p>Now we can access individual resources, like contacts, or addresses… how can we keep the relation between them? If I wanted to get just the phone numbers or addresses for a given contact, how would I do that?</p>
+<p>Again, I need a new endpoint:</p>
+<ul><li><strong>GET /contacts/:id/phone-numbers</strong> will return a list of numbers for this contact</li><li><strong>GET /contacts/:id/addresses</strong> will return a list of addresses for this contact</li></ul>
+<p>See the pattern? The structure is in the REST URLs, and the actions in the HTTP verbs. By properly designing the endpoints, the API will be uniform, comprehensive and easy to use.</p>
+<p>In the same way, we can add resources to a contact:</p>
+<ul><li><strong>POST /contacts/:id/phone-numbers</strong> will create a new phone-number for the given contact</li><li><strong>POST /contacts/:id/addresses</strong> will create a new address for the given contact.</li></ul>
+<p>What about accessing individual related resources? Like, a given phone number or address of a given contact? Which of the following URLs should we use?</p>
+<ul><li>GET|PUT|DELETE <strong>/contacts/:id/phone-numbers/:id</strong></li><li>GET|PUT|DELETE <strong>/phone-numbers/:id</strong></li></ul>
+<p>By definition, URIs should represent a resource uniquely, and while two URIs could point to the same resource, it’s better if we avoid this duplication, in order to keep the API simple. The fewer endpoints, the easier it will be to maintain, use, and test. With this constraint, let’s choose the shorter URI:</p>
+<ul><li>GET|PUT|DELETE <strong>/phone-numbers/:id</strong></li><li>GET|PUT|DELETE<strong> /addresses/:id</strong></li></ul>
+<p>Following this principle,<strong> /contacts/:id/addresses/:id </strong>would be the same as <strong>/addresses/:id</strong> so we can discard the former approach in favor of the latter. However, <strong>/contacts/:id/addresses </strong>is not the same as just /addresses because the first one adds a filter that says “only the addresses that belong to this contact” while the second one will return all of them.</p>
+<p>This can also be achieved by other means, like query parameters, which will allow us to do advanced operations with a collection of resources, like sorting, filtering and grouping. We’ll see about this in future chapters.</p>
+<h2>Advanced Endpoints</h2>
+<p>Sometimes, you need to provide a function that cannot be match by a resource name and an HTTP verb. In the real world, there are situations far more complex than just “create a resource”, or “replace the resource’s data with this”. Let’s see a couple of examples.</p>
+<p>Say we want to not only create a contact, but do so from an existing one so that the user does not need to provide all the contact information up-front. How could we do that?</p>
+<p>The purely REST approach would be: we cannot. Instead, we should request a contact (<strong>GET /contacts/:id</strong>) and then take this data, modify it accordingly and send it with a <strong>POST /contacts request</strong>. Sometimes this is fine, but sometimes this is not what we want. What would be our alternatives?</p>
+<p>One approach would be to provide a contact ID along with the <strong>POST /contacts</strong> request. The server would understand this as “take the contact identified by :id, and create a new one based on its data. This is a bit obscure, in the sense that REST endpoints should be transparent about what they provide or do so that it’s more difficult to make a mistake.</p>
+<p>Another approach would be to provide a specific endpoint that, unlike other RESTful resources, will only accept the HTTP POST verb. The endpoint name, in this particular case, could be a common English verb that expresses an action, so that it’s clear what this special endpoint does. For instance:</p>
+<p><strong>POST /contacts/:id/copy</strong></p>
+<p>Pretty straightforward, right? This endpoint will create a copy of the selected contact, and will return it with the request. It only accepts a POST HTTP verb because it’s not idempotent, that is, subsequent queries to this resource will produce different results (just unlike a GET call, that will produce, if the server data didn’t change, the same results).</p>
+<p>Another example would be attaching and detaching phone numbers from a contact. Imagine that phone numbers are entities by themselves (not identified by a contact). For instance, available land lines in an office. These numbers could be assigned to one or more contacts, and each contact would have at least one number assigned to them.</p>
+<p>With our current design, we could do this:</p>
+<p>DELETE /phone-numbers/:id</p>
+<p>But this would remove the phone number entirely, and that’s not what we want!</p>
+<p>How could we detach a phone number from a contact without deleting it from the system? We need a specific endpoint to handle the detachment action. Again, REST is an architectural style, and so there’s different ways to achieve this.</p>
+<p>For instance, we could override the DELETE HTTP verb so that, when used like this:</p>
+<p><strong>DELETE /contacts/:id/phone-numbers/:id</strong></p>
+<p>It will detach the number from the contact (aka “delete” the contact-number relationship), but will not delete the number from the system. This could work nicely, and it goes in the spirit of REST that resources are identified by names and actions by HTTP verbs.</p>
+<p>We hope we’ve given you a useful insight into REST. If you wish to learn more, please jump into our look at post on <a href="https://www.causelabs.com/post/advanced-rest-api-design/">advanced REST API design</a>. You can also explore our resources below. As always, leave the CauseLabs development team comments or questions below if you’ve got some. We’d love to chat!</p>
+<h2>Resources:</h2>
+<ul><li><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Representational_state_transfer</a></li><li><a href="http://shop.oreilly.com/product/9780596801694.do" rel="noopener noreferrer" target="_blank">http://shop.oreilly.com/product/9780596801694.do</a></li><li><a href="https://pages.apigee.com/web-api-design-website-h-ebook-registration.html" rel="noopener noreferrer" target="_blank">https://pages.apigee.com/web-api-design-website-h-ebook-registration.html</a></li><li><a href="https://pages.apigee.com/ebook-developers-hate-marketing-reg.html" rel="noopener noreferrer" target="_blank">https://pages.apigee.com/ebook-developers-hate-marketing-reg.html</a></li><li><a href="https://pages.apigee.com/ebook-api-facade-pattern-reg.html" rel="noopener noreferrer" target="_blank">https://pages.apigee.com/ebook-api-facade-pattern-reg.html</a></li></ul>  </div>
+
+  <ul class="idea-post__tags">
+    <li class="idea-post__tag">API Development</li>
+    <li class="idea-post__tag">Software Development</li>
+  </ul>
+
+  <div class="idea-post__back">
+    <a class="hand-link hand-link--sm" href="../../ideas/index.html">
+  <span class="hand-link__text">Back to Ideas<svg class="icon icon--underline" viewBox="0 0 180 18" fill="none" aria-hidden="true" focusable="false">
+  <path d="M3 8.5C34 3.4 66.6 1.9 98.6 2.6c26.3.6 52.5 2.6 78.4 6"
+        stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M17 15.3c30-4.2 60.4-5.9 90.7-5.1 20.6.5 41.1 2.2 61.4 4.9"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".85"/>
+</svg></span>
+  <svg class="icon icon--arrow" viewBox="0 0 64 24" fill="none" aria-hidden="true" focusable="false">
+  <path d="M1 12.4c11.6-.7 23.3-1 34.9-1 8.2 0 16.4.2 24.6.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+  <path d="M50.6 4.2c2.9 3.2 6.3 6 10.1 8.1-3.9 1.9-7.4 4.5-10.4 7.6"
+        stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>  </div>
+</article>
+  </main>
+
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__brand">
+      <img class="site-footer__mark"
+           src="../../assets/img/logo-causelabs.png"
+           alt="CauseLabs"
+           width="300" height="52" loading="lazy" decoding="async">
+      <p class="site-footer__tagline">Technology for organizations solving complex problems.</p>
+    </div>
+
+      <nav class="site-footer__col" aria-label="Company">
+        <h2 class="site-footer__heading">Company</h2>
+        <ul class="site-footer__list">
+            <li><a class="site-footer__link" href="../../work/index.html">Work</a></li>
+            <li><a class="site-footer__link" href="../../approach/index.html">Approach</a></li>
+            <li><a class="site-footer__link" href="../../ideas/index.html">Ideas</a></li>
+            <li><a class="site-footer__link" href="../../about/index.html">About</a></li>
+            <li><a class="site-footer__link" href="../../careers/index.html">Careers</a></li>
+            <li><a class="site-footer__link" href="../../contact/index.html">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="site-footer__col" aria-label="Connect">
+        <h2 class="site-footer__heading">Connect</h2>
+        <ul class="site-footer__list">
+            <li><a class="site-footer__link" href="https://www.facebook.com/causelabs" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li><a class="site-footer__link" href="https://www.instagram.com/causelabs/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a class="site-footer__link" href="https://www.linkedin.com/company/causelabs-pbc/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a class="site-footer__link" href="https://youtube.com/@causelabs" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+        </ul>
+      </nav>
+
+  </div>
+
+  <div class="site-footer__bar">
+    <p class="site-footer__copy">© 2026 CauseLabs. All rights reserved.</p>
+    <ul class="site-footer__legal">
+        <li><a class="site-footer__link" href="../../privacy/index.html">Privacy</a></li>
+        <li><a class="site-footer__link" href="../../accessibility/index.html">Accessibility</a></li>
+    </ul>
+  </div>
+</footer>
+
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

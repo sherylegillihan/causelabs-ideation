@@ -1,0 +1,124 @@
+/* =========================================================================
+   Self-hosted webfonts.
+
+   All five families are SIL Open Font License 1.1 — free for commercial use,
+   redistributable, no attribution required in the UI. Full licence texts are
+   in assets/fonts/LICENSES.txt.
+
+   Self-hosted rather than pulled from Google Fonts so the page has no
+   third-party requests: faster first paint, no cross-origin dependency, and
+   no visitor data leaving the site (which is what makes Google Fonts a
+   GDPR question in the EU).
+
+   Latin subset only. Add other subsets by dropping in the matching woff2
+   and duplicating the @font-face with a `unicode-range`.
+   ========================================================================= */
+
+/* --- Fraunces — every heading on the site (display + card/quote roles) ---
+   One family covering both --font-display and --font-serif tokens: weight
+   400/500 (+ 500 italic) for the big display headings, 600/700 for card and
+   quote headings. Same optical-size-aware Fraunces family either way, just
+   different static weight instances — this is the static (non-variable)
+   build, which is what keeps every other @font-face in this file simple. */
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/fraunces-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/fraunces-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/fraunces-latin-500-italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/fraunces-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/fraunces-latin-700-normal.woff2") format("woff2");
+}
+
+/* --- Figtree — body copy -------------------------------------------------- */
+
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/figtree-latin-300-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/figtree-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/figtree-latin-500-normal.woff2") format("woff2");
+}
+
+/* --- Archivo — nav, eyebrows, all-caps UI -------------------------------- */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/archivo-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/archivo-latin-700-normal.woff2") format("woff2");
+}
+
+/* --- Caveat — hand-lettered links and asides ----------------------------- */
+
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/caveat-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Caveat";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/caveat-latin-600-normal.woff2") format("woff2");
+}
